@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GPU 对比</title>
+    <script>
+      document.documentElement.dataset.theme = localStorage.getItem("gpuTheme") || "dark";
+    </script>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body data-page="compare">
+    <div class="site-notice">仅用于个人日常学习使用，不代表官方机构观点。开发者：Codex 和 Bryan Zhu</div>
+    <header class="app-header">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换黑白底色">白底</button>
+      <a class="brand" href="index.html" aria-label="返回 GPU 列表">
+        <span>GPU</span>
+        <strong>NVIDIA GPU 规格参数库</strong>
+      </a>
+      <nav class="top-nav" aria-label="主导航">
+        <a href="index.html">GPU 总览</a>
+        <a href="compare.html" aria-current="page">GPU 对比</a>
+      </nav>
+    </header>
+
+    <main class="page">
+      <section class="page-title compact-title">
+        <div>
+          <p class="eyebrow">Comparison</p>
+          <h1>GPU 参数对比</h1>
+        </div>
+        <a class="source-link" href="https://www.nvidia.cn/geforce/graphics-cards/compare/#compare-50" target="_blank" rel="noreferrer">数据源：NVIDIA 官方对比页</a>
+      </section>
+
+      <section class="compare-builder" aria-label="选择对比 GPU">
+        <div class="select-field">
+          <label for="gpuPicker">添加 GPU</label>
+          <select id="gpuPicker"></select>
+        </div>
+        <div class="selected-list" id="compareSelected"></div>
+      </section>
+
+      <section class="chart-panel" aria-label="生成图表">
+        <div class="chart-control">
+          <div>
+            <p class="eyebrow">柱状图</p>
+            <h2>勾选要生成图表的规格项</h2>
+          </div>
+          <div class="metric-options" id="metricOptions"></div>
+        </div>
+        <div class="charts" id="charts"></div>
+      </section>
+
+      <section class="table-shell compare-table-shell" aria-label="GPU 对比表">
+        <table class="compare-table" id="compareTable">
+          <thead id="compareTableHead"></thead>
+          <tbody id="compareTableBody"></tbody>
+        </table>
+      </section>
+    </main>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

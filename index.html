@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NVIDIA GPU 规格参数库</title>
+    <script>
+      document.documentElement.dataset.theme = localStorage.getItem("gpuTheme") || "dark";
+    </script>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body data-page="list">
+    <div class="site-notice">仅用于个人日常学习使用，不代表官方机构观点。开发者：Codex 和 Bryan Zhu</div>
+    <header class="app-header">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换黑白底色">白底</button>
+      <a class="brand" href="index.html" aria-label="返回 GPU 列表">
+        <span>GPU</span>
+        <strong>NVIDIA GPU 规格参数库</strong>
+      </a>
+      <nav class="top-nav" aria-label="主导航">
+        <a href="index.html" aria-current="page">GPU 总览</a>
+        <a id="compareNav" href="compare.html">GPU 对比</a>
+      </nav>
+    </header>
+
+    <main class="page">
+      <section class="page-title">
+        <div>
+          <p class="eyebrow">GeForce Desktop GPUs</p>
+          <h1>RTX 50 / 40 / 30 / 20 / GTX 16 系列 GPU 总览</h1>
+        </div>
+        <a class="source-link" href="https://www.nvidia.cn/geforce/graphics-cards/compare/#compare-50" target="_blank" rel="noreferrer">数据源：NVIDIA 官方对比页</a>
+      </section>
+
+      <section class="summary-grid" aria-label="数据概览">
+        <div>
+          <strong id="gpuCount">0</strong>
+          <span>款 GPU</span>
+        </div>
+        <div>
+          <strong>5</strong>
+          <span>个系列</span>
+        </div>
+        <div>
+          <strong>41</strong>
+          <span>规格字段</span>
+        </div>
+      </section>
+
+      <section class="compare-tray" aria-label="已选对比">
+        <div>
+          <strong>已选对比</strong>
+          <span id="selectedText">请选择至少 2 款 GPU</span>
+        </div>
+        <div class="tray-actions">
+          <button class="ghost-button" id="clearSelection" type="button">清空</button>
+          <a class="primary-button disabled" id="compareButton" href="compare.html" aria-disabled="true">开始比较</a>
+        </div>
+      </section>
+
+      <section class="gpu-list-shell" id="gpuList" aria-label="GPU 型号列表"></section>
+    </main>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
