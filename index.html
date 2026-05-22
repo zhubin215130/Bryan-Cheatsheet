@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NVIDIA 查询工具导航</title>
+    <script>
+      document.documentElement.dataset.theme = localStorage.getItem("gpuTheme") || "dark";
+    </script>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body data-page="home">
+    <div class="site-notice">仅用于个人日常学习使用，不代表官方机构观点。联系方式：BryanZhu zhubin215130@163.com。</div>
+    <header class="app-header">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换黑白底色">白底</button>
+      <a class="brand" href="index.html" aria-label="返回项目入口">
+        <span>NV</span>
+        <strong>NVIDIA 查询工具导航</strong>
+      </a>
+      <nav class="top-nav" aria-label="主导航">
+        <a href="index.html" aria-current="page">项目入口</a>
+        <a href="gpu-list.html">GPU 总览</a>
+        <a href="rtx.html">RTX 技术库</a>
+      </nav>
+    </header>
+
+    <main class="page home-page">
+      <section class="page-title home-title">
+        <div>
+          <p class="eyebrow">Project Entrance</p>
+          <h1>NVIDIA 数据查询入口</h1>
+        </div>
+      </section>
+
+      <section class="home-nav-grid" aria-label="功能入口">
+        <a class="home-nav-card" href="gpu-list.html">
+          <span>GPU</span>
+          <strong>NVIDIA GPU 硬件规格查询</strong>
+          <small>查看 GeForce RTX / GTX 桌面 GPU 参数，并进入对比工具。</small>
+        </a>
+        <a class="home-nav-card" href="rtx.html">
+          <span>RTX</span>
+          <strong>RTX 游戏与应用支持列表</strong>
+          <small>搜索游戏或应用，查看 DLSS、光线追踪、DLAA、AI 等支持情况。</small>
+        </a>
+      </section>
+    </main>
+
+    <script>
+      const button = document.getElementById("themeToggle");
+      const applyTheme = (theme) => {
+        document.documentElement.dataset.theme = theme;
+        localStorage.setItem("gpuTheme", theme);
+        button.textContent = theme === "dark" ? "白底" : "黑底";
+        button.setAttribute("aria-pressed", theme === "light" ? "true" : "false");
+      };
+      applyTheme(document.documentElement.dataset.theme || "dark");
+      button.addEventListener("click", () => {
+        applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
+      });
+    </script>
+  </body>
+</html>

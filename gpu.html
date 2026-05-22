@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GPU 详细规格</title>
+    <script>
+      document.documentElement.dataset.theme = localStorage.getItem("gpuTheme") || "dark";
+    </script>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body data-page="detail">
+    <div class="site-notice">仅用于个人日常学习使用，不代表官方机构观点。联系方式：BryanZhu zhubin215130@163.com。数据更新日期：2026年5月22日</div>
+    <header class="app-header">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换黑白底色">白底</button>
+      <a class="brand" href="gpu-list.html" aria-label="返回 GPU 列表">
+        <span>GPU</span>
+        <strong>NVIDIA GPU 硬件规格查询</strong>
+      </a>
+      <nav class="top-nav" aria-label="主导航">
+        <a href="index.html">项目入口</a>
+        <a href="gpu-list.html">GPU 总览</a>
+        <a id="compareNav" href="compare.html">GPU 对比</a>
+        <a href="rtx.html">RTX 技术库</a>
+      </nav>
+    </header>
+
+    <main class="page">
+      <section class="detail-hero" id="detailHero"></section>
+      <section class="detail-grid" id="detailGrid" aria-label="GPU 详细规格"></section>
+    </main>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

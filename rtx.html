@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NVIDIA RTX 游戏和应用技术库</title>
+    <script>
+      document.documentElement.dataset.theme = localStorage.getItem("gpuTheme") || "dark";
+    </script>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body data-page="rtx-list">
+    <div class="site-notice">仅用于个人日常学习使用，不代表官方机构观点。开发者：Codex&BryanZhu。数据更新日期：2026 年 4 月 29 日</div>
+    <header class="app-header">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换黑白底色">白底</button>
+      <a class="brand" href="rtx.html" aria-label="返回 RTX 技术库">
+        <span>RTX</span>
+        <strong>NVIDIA RTX 游戏和应用技术库</strong>
+      </a>
+      <nav class="top-nav" aria-label="主导航">
+        <a href="index.html">项目入口</a>
+        <a href="gpu-list.html">GPU 总览</a>
+        <a href="compare.html">GPU 对比</a>
+        <a href="rtx.html" aria-current="page">RTX 技术库</a>
+      </nav>
+    </header>
+
+    <main class="page">
+      <section class="page-title">
+        <div>
+          <p class="eyebrow">RTX Games, Apps & Engines</p>
+          <h1>RTX 游戏、应用和技术支持查询</h1>
+        </div>
+        <a class="source-link" href="https://www.nvidia.cn/geforce/news/nvidia-rtx-games-engines-apps/" target="_blank" rel="noreferrer">数据源：NVIDIA 官方 RTX 列表</a>
+      </section>
+
+      <section class="summary-grid rtx-summary-grid" aria-label="数据概览">
+        <div>
+          <strong id="rtxTotalCount">0</strong>
+          <span>条记录</span>
+        </div>
+        <div>
+          <strong id="rtxGameCount">0</strong>
+          <span>游戏</span>
+        </div>
+        <div>
+          <strong id="rtxAppCount">0</strong>
+          <span>应用</span>
+        </div>
+        <div>
+          <strong id="rtxVisibleCount">0</strong>
+          <span>当前显示</span>
+        </div>
+      </section>
+
+      <section class="rtx-search-shell" aria-label="搜索 RTX 游戏和应用">
+        <div class="search-field">
+          <label for="rtxSearch">搜索游戏或应用</label>
+          <input id="rtxSearch" type="search" autocomplete="off" placeholder="输入部分名称，例如 Alan Wake、赛博朋克、Blender">
+          <div class="search-suggestions" id="rtxSuggestions" hidden></div>
+        </div>
+        <div class="active-filter" id="activeFilterLabel">显示全部项目</div>
+      </section>
+
+      <section class="quick-filter-shell" aria-label="快捷筛选">
+        <div class="quick-filter-control">
+          <label for="quickFilterSelect">快捷筛选</label>
+          <select id="quickFilterSelect"></select>
+        </div>
+      </section>
+
+      <section class="rtx-results-head" aria-label="筛选结果">
+        <div>
+          <strong id="rtxResultTitle">全部项目</strong>
+          <span id="rtxResultMeta">按 NVIDIA 官方列表整理</span>
+        </div>
+        <button class="ghost-button" id="resetRtxFilters" type="button">重置筛选</button>
+      </section>
+
+      <section class="table-shell rtx-table-shell" aria-label="RTX 技术支持列表">
+        <table class="rtx-table">
+          <thead>
+            <tr>
+              <th>名称</th>
+              <th>类型</th>
+              <th>DLSS 多帧生成</th>
+              <th>DLSS 帧生成</th>
+              <th>DLSS 超分辨率</th>
+              <th>DLSS 光线重建</th>
+              <th>DLAA</th>
+              <th>光线追踪</th>
+              <th>AI</th>
+              <th>详情</th>
+            </tr>
+          </thead>
+          <tbody id="rtxTableBody"></tbody>
+        </table>
+      </section>
+    </main>
+
+    <script src="rtx-data.js"></script>
+    <script src="rtx-app.js"></script>
+  </body>
+</html>
