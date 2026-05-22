@@ -77,12 +77,26 @@ function renderGpuList() {
   list.innerHTML = "";
 
   SERIES_ORDER.forEach((series) => {
+    const seriesGpus = GPUS.filter((gpu) => gpu.series === series);
     const divider = document.createElement("div");
     divider.className = "gpu-series-divider";
-    divider.textContent = series;
+    const title = document.createElement("span");
+    title.textContent = series;
+    const selectAll = document.createElement("button");
+    selectAll.className = "series-select-all";
+    selectAll.type = "button";
+    selectAll.textContent = "勾选全部";
+    selectAll.setAttribute("aria-label", `勾选全部 ${series} GPU`);
+    selectAll.addEventListener("click", () => {
+      seriesGpus.forEach((gpu) => selectedIds.add(gpu.id));
+      saveSelection();
+      renderGpuList();
+      updateTray();
+    });
+    divider.append(title, selectAll);
     list.append(divider);
 
-    GPUS.filter((gpu) => gpu.series === series).forEach((gpu) => {
+    seriesGpus.forEach((gpu) => {
       const item = document.createElement("article");
       item.className = "gpu-choice";
       item.dataset.id = gpu.id;
@@ -99,14 +113,24 @@ function renderGpuList() {
         updateTray();
       });
 
-      const link = document.createElement("a");
-      link.href = `gpu.html?id=${gpu.id}`;
-      link.textContent = gpu.name;
+      const name = document.createElement("span");
+      name.className = "gpu-choice-name";
+      name.textContent = gpu.name;
 
-      item.append(checkbox, link);
+      const detailLink = document.createElement("a");
+      detailLink.className = "gpu-detail-link";
+      detailLink.href = `gpu.html?id=${gpu.id}`;
+      detailLink.textContent = "详情";
+      detailLink.addEventListener("click", (event) => event.stopPropagation());
+
+      item.append(checkbox, name, detailLink);
       item.addEventListener("click", (event) => {
-        if (event.target.closest("input") || event.target.closest("a")) return;
-        window.location.href = `gpu.html?id=${gpu.id}`;
+        if (event.target.closest("input") || event.target.closest(".gpu-detail-link")) return;
+        checkbox.checked = !checkbox.checked;
+        if (checkbox.checked) selectedIds.add(gpu.id);
+        else selectedIds.delete(gpu.id);
+        saveSelection();
+        updateTray();
       });
       list.append(item);
     });
@@ -229,10 +253,10 @@ function renderSelectedCompare() {
 function renderMetricOptions() {
   const box = byId("metricOptions");
   box.innerHTML = "";
-  CHART_FIELDS.forEach((field, index) => {
+  CHART_FIELDS.forEach((field) => {
     const label = document.createElement("label");
     label.className = "metric-check";
-    label.innerHTML = `<input type="checkbox" value="${field.key}" ${index < 3 ? "checked" : ""}>${field.label}`;
+    label.innerHTML = `<input type="checkbox" value="${field.key}" checked>${field.label}`;
     label.querySelector("input").addEventListener("change", renderCharts);
     box.append(label);
   });

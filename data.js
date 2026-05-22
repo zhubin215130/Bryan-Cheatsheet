@@ -12,6 +12,7 @@ const SPEC_FIELDS = [
   { key: "cudaCores", label: "NVIDIA CUDA 核心数量", category: "GPU 引擎规格" },
   { key: "shaderCore", label: "Shader Core", category: "GPU 引擎规格" },
   { key: "tensorCore", label: "Tensor Core / AI", category: "GPU 引擎规格" },
+  { key: "aiTops", label: "AI TOPS", category: "GPU 引擎规格" },
   { key: "rtCore", label: "RT Core", category: "GPU 引擎规格" },
   { key: "boostClock", label: "加速频率", category: "GPU 引擎规格" },
   { key: "baseClock", label: "基础频率", category: "GPU 引擎规格" },
@@ -54,6 +55,7 @@ const SPEC_FIELDS = [
 
 const CHART_FIELDS = [
   { key: "cudaCores", label: "CUDA 核心数量", unit: "个" },
+  { key: "aiTops", label: "AI TOPS", unit: "TOPS" },
   { key: "boostClock", label: "加速频率", unit: "GHz" },
   { key: "baseClock", label: "基础频率", unit: "GHz" },
   { key: "vram", label: "显存容量", unit: "GB" },
@@ -166,8 +168,25 @@ const GPUS = [
   gpu16("gtx-1630", "GeForce GTX 1630", 512, "1785 MHz", "1740 MHz", "4GB GDDR6", "64 位", dash, DISPLAY_16_60, "HDMI 2.0b, DL-DVI-D, DP 1.4a", "5.7\" (145 mm)", "4.38\" (111 mm)", "2 插槽", "90-94 ℃", "75 W", "300 W", "一个 6-pin 接口", { cudaCores: 512, boostClock: 1.785, baseClock: 1.74, vram: 4, memoryBus: 64, graphicsPower: 75, systemPower: 300, maxTemp: 94 })
 ];
 
+normalizeAiTops();
+
 function gpu(id, series, name, specs, metrics) {
   return { id, series, name, specs, metrics };
+}
+
+function normalizeAiTops() {
+  GPUS.forEach((gpu) => {
+    const tensorCore = gpu.specs.tensorCore;
+    const match = typeof tensorCore === "string" && tensorCore.match(/^(.+?)\s*·\s*([\d.]+)\s*AI TOPS$/i);
+
+    if (match) {
+      gpu.specs.tensorCore = match[1].trim();
+      gpu.specs.aiTops = `${match[2]} AI TOPS`;
+      gpu.metrics.aiTops = Number(match[2]);
+    } else {
+      gpu.specs.aiTops = dash;
+    }
+  });
 }
 
 function ada(overrides) {
