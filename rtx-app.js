@@ -8,6 +8,12 @@ const RTX_FILTERS = [
     test: () => true
   },
   {
+    id: "apps",
+    label: "所有RTX应用",
+    title: "所有RTX应用",
+    test: (item) => item.type === "App"
+  },
+  {
     id: "mfg6x",
     label: "所有 DLSS 6 倍多帧生成的游戏和应用",
     title: "DLSS 6 倍多帧生成",
